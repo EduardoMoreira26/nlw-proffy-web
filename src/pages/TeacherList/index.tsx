@@ -1,21 +1,40 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
+import api from '../../services/api';
+
 import Input from '../../components/Input';
 import PageHeader from '../../components/PageHeader';
 import Select from '../../components/Select';
-import TeacherItem from '../../components/TeacherItem';
+import TeacherItem, { Teacher } from '../../components/TeacherItem';
 
 import './styles.css';
 
+
 const TeacherList = () => {
+
+  const [teachers, setTeachers] = useState([]);
 
   const [subject, setSubject] = useState('');
   const [week_day, setWeekDay] = useState('');
   const [time, setTime] = useState('');
 
+  const searchTeachers = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const response = await api.get('classes', {
+      params: {
+        subject,
+        week_day,
+        time,
+      }
+    });
+
+    setTeachers(response.data);
+  }
+
   return (
     <div id="page-teacher-list" className="container">
       <PageHeader title="Estes são os proffys disponíveis.">
-        <form id="search-teachers">
+        <form id="search-teachers" onSubmit={searchTeachers}>
 
           <Select
             name="subject"
@@ -58,15 +77,24 @@ const TeacherList = () => {
             name="time"
             label="Hora"
             value={time}
-            onChange={e => { setTime(e.target.value) }}
+            onChange={e => {
+              setTime(e.target.value)
+            }}
           />
+
+          <button type="submit">
+            Buscar
+          </button>
 
         </form>
       </PageHeader>
 
 
       <main>
-        <TeacherItem />
+        {teachers.map((teacher: Teacher) => {
+          return <TeacherItem key={teacher.id} teacher={teacher} />;
+        })}
+
       </main>
     </div>
   );
