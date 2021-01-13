@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Input from '../../components/Input';
 import PageHeader from '../../components/PageHeader';
 import Select from '../../components/Select';
@@ -8,6 +8,10 @@ import './styles.css';
 
 const TeacherList = () => {
 
+  const [subject, setSubject] = useState('');
+  const [week_day, setWeekDay] = useState('');
+  const [time, setTime] = useState('');
+
   return (
     <div id="page-teacher-list" className="container">
       <PageHeader title="Estes são os proffys disponíveis.">
@@ -16,6 +20,8 @@ const TeacherList = () => {
           <Select
             name="subject"
             label="Matéria"
+            value={subject}
+            onChange={e => { setSubject(e.target.value) }}
             options={[
               { value: 'Artes', label: 'Artes' },
               { value: 'Biologia', label: 'Biologia' },
@@ -34,6 +40,8 @@ const TeacherList = () => {
           <Select
             name="week_day"
             label="Dia da semana"
+            value={week_day}
+            onChange={e => { setWeekDay(e.target.value) }}
             options={[
               { value: '0', label: 'Domingo' },
               { value: '1', label: 'Segunda-feira' },
@@ -45,7 +53,13 @@ const TeacherList = () => {
             ]}
           />
 
-          <Input type="time" name="time" label="Hora" />
+          <Input
+            type="time"
+            name="time"
+            label="Hora"
+            value={time}
+            onChange={e => { setTime(e.target.value) }}
+          />
 
         </form>
       </PageHeader>
