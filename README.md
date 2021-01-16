@@ -15,13 +15,10 @@ Essa aplicação foi realizada durante a Next Level Week #2, projeto da Rocketse
 
 ## ⛏️ Ferramentas utilizadas:
 
-- [NodeJs](https://nodejs.org/en/)
+- [ReactJS](https://reactjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
+- [React Router](https://github.com/ReactTraining/react-router)
 - [Axios](https://github.com/axios/axios)
-- [Sqlite](https://www.sqlite.org/index.html)
-- [Knex](http://knexjs.org/)
-
-
 
 ## 💿 Instalar dependências: 
 
